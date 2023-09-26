@@ -1402,6 +1402,18 @@ let weatherCodes =[
   state: 86,
   text: "Snow showers"
 },
+{
+  state: 95,
+  text: "Thunderstorm"
+},
+{
+  state: 96,
+  text: "Thunderstorm"
+},
+{
+  state: 99,
+  text: "Thunderstorm"
+},
 ]
 let wCode = data.weathercode
 const greaterElement = weatherCodes.find( elemet => elemet.state === wCode);
@@ -1444,6 +1456,7 @@ card?.classList.add("night")
 .day{
   background-image: url(../assets/day.svg);
   background-repeat: no-repeat;
+  color: #070f16;
   margin:  auto 10px;
   display: flex;
   justify-content: center;
