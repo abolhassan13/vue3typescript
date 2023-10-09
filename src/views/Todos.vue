@@ -23,10 +23,10 @@ class="addTodo">
 </div>
 </template>
 <script setup lang="ts">
-import { ref , reactive, nextTick } from 'vue'
+import { ref } from 'vue'
 import { useI18n } from "vue-i18n"
 
-let tem = ref('')
+let tem : string|null
 tem = localStorage.getItem("thems")
 
 const { t } = useI18n({
@@ -34,7 +34,7 @@ const { t } = useI18n({
   useScope: 'local'
 })
 
-let tasks = reactive([
+let tasks = ref([
 {
 "title": "Learning typescript",
 "id": 2
@@ -52,17 +52,15 @@ const newTask = ref('')
 
 function handeleSubmit() {
 if (newTask.value.length > 0) {
-tasks.push({
+tasks.value.push({
 title: newTask.value,
 id: Math.floor(Math.random() * 10000)
 });
 newTask.value = '';
 }}
 
-async function deleteTask(id: number) {
-await nextTick()
-tasks = tasks.filter((task) => id !== task.id)
-event.target.parentElement.parentElement.remove();
+function deleteTask(id: number) {
+tasks.value = tasks.value.filter((task) => id !== task.id)
 }
 
 </script>

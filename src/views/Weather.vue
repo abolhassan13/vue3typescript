@@ -18,12 +18,6 @@
 import axios from 'axios'
 import { ref } from 'vue';
 import citiesIran from '../store/ir.json'
-import { useI18n } from "vue-i18n"
-
-const { t } = useI18n({
-  inheritLocale: true,
-  useScope: 'local'
-})
 
 interface Option {
   value: string;
@@ -1287,16 +1281,12 @@ const  cityName = citiesIran.find((element)=> element.city === value.value)
 let city = cityName?.city
 value.value = ''
 const response =  await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${cityName?.lat}&longitude=${cityName?.lng}&current_weather=true`)
- let data = response.data.current_weather
+let data = response.data.current_weather
 updateUI(city, data)
 }
-const updateUI = (city, data) => {
-const deteils = document.querySelector('.details')!
-const card = document.querySelector('.card')!
-interface weatherCode {
-  text: string;
-  state: number
-}
+const updateUI = (city: string|undefined, data: { weathercode: number; temperature: number; is_day: string; }) => {
+const deteils = document.querySelector('.details')
+const card = document.querySelector('.card')
 let weatherCodes =[
   {
   state: 0,
@@ -1417,7 +1407,7 @@ let weatherCodes =[
 ]
 let wCode = data.weathercode
 const greaterElement = weatherCodes.find( elemet => elemet.state === wCode);
-  deteils.innerHTML = `
+  deteils!.innerHTML = `
     <div>
     <h1  style=" padding: 35px; font-size: 26px;">${city}</h1>
     <div style=" padding: 30px; font-size: 20px;"><h3>${greaterElement?.text}</h3></div>

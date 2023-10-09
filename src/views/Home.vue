@@ -17,7 +17,7 @@ localStorage.setItem("username", name)
 }
 }
 
-let tem = ref('')
+let tem : string|null
 tem = localStorage.getItem("thems")
 
 let username: string|null

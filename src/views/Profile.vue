@@ -28,7 +28,7 @@ id="formProflie"
 </div>
 
 <div class="submit">
-  <button @click="handelSubmit" class="save" type="primary" html-type="submit">{{t('Save')}}</button>
+  <button @click="handelSubmit" class="save" html-type="submit">{{t('Save')}}</button>
 </div>
 </form>
 </template>
@@ -38,12 +38,11 @@ import { ref } from 'vue'
 import i18n from "../i18n"
 import { useI18n } from "vue-i18n"
 
-const lang = ref('en')
-
+const lang = ref< "en" | "fa" >('en')
 const username = ref('')
 const terms = ref<boolean>()
 const themes = ref('blueSky')
-let tem = ref('')
+let tem : string|null
 tem = localStorage.getItem("thems")
 
 const { t } = useI18n({
